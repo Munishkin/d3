@@ -1,49 +1,208 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
 
-		<title>reveal.js</title>
+    <title>reveal.js</title>
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/reveal.css" />
+    <link rel="stylesheet" href="css/theme/black.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai.css" />
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match(/print-pdf/gi)
+        ? 'css/print/pdf.css'
+        : 'css/print/paper.css';
+      document.getElementsByTagName('head')[0].appendChild(link);
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <img width="200" height="200" src="img/d3.png" alt="" />
+          <h3>
+            Data-Driven Documents
+          </h3>
+          <p>
+            JavaScript library for visualizing data with HTML, SVG, and CSS.
+            <small
+              >Created in 2011 by
+              <a
+                href="https://en.wikipedia.org/wiki/Mike_Bostock"
+                target="_blank"
+                >Mike Bostock</a
+              >, <a href="https://www.jasondavies.com/">Jason Davies</a> ,
+              <a
+                href="https://en.wikipedia.org/wiki/Jeffrey_Heer"
+                target="_blank"
+                >Jeffrey Heer</a
+              >,
+              <a href="https://vadim.ogievetsky.com/" target="_blank"
+                >Vadim Ogievetsky</a
+              >, and
+              <a
+                href="https://github.com/d3/d3/graphs/contributors"
+                target="_blank"
+                >community</a
+              ></small
+            >
+          </p>
+        </section>
+        <section>
+          <h3>How to make sense out of data</h3>
+          <pre><code data-trim data-noescape>
+							YearStart,YearEnd,LocationAbbr,LocationDesc,Datasource,Class,Topic,
+							Question,Data_Value_Unit,Data_Value_Type,Data_Value,Data_Value_Alt,
+							Data_Value_Footnote_Symbol,Data_Value_Footnote,Low_Confidence_Limit,
+							High_Confidence_Limit ,Sample_Size,Total,Age(months),Gender,Race/Ethnicity,
+							GeoLocation,ClassID,TopicID,QuestionID,DataValueTypeID,LocationID,
+							StratificationCategory1,Stratification1,StratificationCategoryId1,StratificationID1
+							2008,2008,AL,Alabama,"Women, Infants, and Children Participant and Program
+							Characteristics",Obesity / Weight Status,Obesity / Weight Status,Percent of WIC
+							children aged 2 to 4 years who have an overweight classification,,Value,15.4,15.4,,,
+							15.1,15.8,43287,Total,,,,"(32.84057112200048, -86.63186076199969)",OWS,OWS1,
+							Q040,VALUE,01,Total,Total,OVR,OVERALL
+							2008,2008,AL,Alabama,"Women, Infants, and Children Participant and Program
+							Characteristics",Obesity / Weight Status,Obesity / Weight Status,Percent of WIC
+							children aged 2 to 4 years who have an overweight classification,,Value,15.5,15.5,,,
+							15.0,16.0,21912,,,Male,,"(32.84057112200048, -86.63186076199969)",OWS,OWS1,
+							Q040,VALUE,01,Gender,Male,GEN,MALE
+					</code></pre>
+        </section>
+        <section id="fragments">
+          <h3>Choosing the right tools to tell the story</h3>
+          <p>
+            <font color="#f08">Obesity</font> is, on average, inversely
+            proportional to the average <font color="#f08">education</font> of
+            population
+          </p>
+          <a
+            class="fragment"
+            href="http://www.vizwiz.com/2013/01/alberto-cairo-three-steps-to-become.html"
+            target="_blank"
+            ><img
+              width="700"
+              src="./img/relationship-obesity-vs-education.png"
+              alt=""
+          /></a>
+        </section>
+        <section data-background-iframe="http://burostat.ru/"></section>
+        <section id="fragments">
+          <h3>How to use D3</h3>
+          <p style="text-align: left">
+            (1) Link D3 library directly in your page
+          </p>
+          <pre><code data-trim data-noescape>
+							&lt;script src=&quot;https://d3js.org/d3.v5.min.js&quot;&gt;&lt;/script&gt;
+					</code></pre>
+          <p style="text-align: left">
+            (2) Install a library on your computer
+          </p>
+          <pre><code data-trim data-noescape>
+								npm install d3
+						</code></pre>
+          <p style="text-align: left">
+            (3)
+            <a href="https://github.com/d3/d3/releases/latest"
+              >Or download the latest version @
+              https://github.com/d3/d3/releases/latest</a
+            >
+          </p>
+        </section>
+        <section>
+          <h3>An example</h3>
+          <pre><code data-trim data-noescape>
+							&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;
+							...
+							d3.select("#content")
+							.selectAll("p")
+							.data([8, 15, 16, 23, 42])
+							.enter().append("p")
+							.text(function(d) { return "I’m number " + d + "!"; });
+					</code></pre>
+          <div id="content"></div>
+        </section>
+        <section>
+          <h3>An example</h3>
+          <pre><code data-trim data-noescape>
+						&lt;svg width=&quot;760&quot; height=&quot;140&quot;&gt;
+							&lt;g transform=&quot;translate(70, 70)&quot;&gt;
+								&lt;circle r=&quot;40&quot; /&gt;
+								&lt;circle r=&quot;40&quot; cx=&quot;120&quot; /&gt;
+								...
+							&lt;/g&gt;
+				  &lt;/svg&gt;
+				  ...
+						d3.selectAll('circle')
+						.each(function(d, i) {
+							const odd = i % 2 === 1;
+							d3.select(this)
+							.style('fill', odd ? 'orange' : '#ddd')
+							.attr('r', odd ? 40 : 20);
+						});
+					</code></pre>
+          <svg width="760" height="140">
+            <g transform="translate(70, 70)">
+              <circle r="40" />
+              <circle r="40" cx="120" />
+              <circle r="40" cx="240" />
+              <circle r="40" cx="360" />
+              <circle r="40" cx="480" />
+              <circle r="40" cx="620" />
+            </g>
+          </svg>
+        </section>
+        <section>
+          <div id="svgInspiration"></div>
+        </section>
+        <section>
+          <h3>Resources:</h3>
+          <p><a href="https://bl.ocks.org/">Popular Blocks @ bl.ocks.org</a></p>
+          <p>
+            <a href="https://observablehq.com/"
+              >Observable @ observablehq.com</a
+            >
+          </p>
+          <p>
+            <a href="https://habr.com/ru/post/342106/"
+              >Просто о D3.js @ habr.com/</a
+            >
+          </p>
+          <p>
+            <a href="https://www.d3indepth.com/">D3 in Depth @ d3indepth.com</a>
+          </p>
+        </section>
+      </div>
+    </div>
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <script src="js/reveal.js"></script>
 
-		<script src="js/reveal.js"></script>
-
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.js', async: true },
+        ],
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+    <script src="./js/custom.js"></script>
+  </body>
 </html>
