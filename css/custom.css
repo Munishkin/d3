@@ -2,7 +2,22 @@
   position: relative;
 }
 
-circle {
-  fill: #ddd;
-  cursor: pointer;
+.tracks {
+  fill: none;
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.bodies path {
+  stroke: #000;
+  stroke-width: 1.5px;
+}
+
+.bodies .text-path {
+  stroke: none;
+}
+
+.bodies text {
+  fill: #000;
+  font: 500 16px 'Helvetica Neue';
 }
